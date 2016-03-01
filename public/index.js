@@ -1,2 +1,2 @@
-alert('hi');
 import 'angular';
+import './js/controller';
