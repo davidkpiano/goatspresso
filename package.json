@@ -14,7 +14,7 @@
     "build": "webpack -p --config webpack.config.js",
     "build:watch": "webpack-dev-server --config webpack.config.js --port 9999",
     "build:release": "npm run build && firebase deploy",
-    "start": "npm run build:watch"
+    "start": "node ./index.js"
   },
   "author": "",
   "license": "ISC",
