@@ -11,11 +11,10 @@
     "mongo:start": "mongod --port 27017 &> ./log/mongo.log &",
     "mongo:stop": "killall mongod",
     "stop": "npm run mongo:stop",
-    "serve:heroku": "node ./api/index.js",
-    "start": "npm run serve:heroku",
     "build": "webpack -p --config webpack.config.js",
     "build:watch": "webpack-dev-server --config webpack.config.js --port 9999",
-    "build:release": "npm run build && firebase deploy"
+    "build:release": "npm run build && firebase deploy",
+    "start": "npm run build:watch"
   },
   "author": "",
   "license": "ISC",
