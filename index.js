@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var port = process.env.API_PORT || 5478;
+var port = process.env.API_PORT || 5478; // set to 8080 in env
 var cors = require('cors');
 var mongo = require('mongodb').MongoClient;
 
@@ -15,7 +15,7 @@ app.get('/seed-menu', (req, res) => {
 
   mongo.connect(mongoUrl, (err, db) => {
 
-    var menu = require('./menu');
+    var menu = require('./api/menu');
     db.collection('menu').remove({}, () => {
       db.collection('menu').insertMany(menu, (err, result) => {
         res.status(err ? 400 : 200).json(!err);
