@@ -15,7 +15,7 @@ app.get('/seed-menu', (req, res) => {
 
   mongo.connect(mongoUrl, (err, db) => {
 
-    var menu = require('./menu');
+    var menu = require('./api/menu');
     db.collection('menu').remove({}, () => {
       db.collection('menu').insertMany(menu, (err, result) => {
         res.status(err ? 400 : 200).json(!err);
