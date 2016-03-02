@@ -77,7 +77,7 @@ app.
     this.coffees = [];
   }])
 
-  .controller('CoffeeController', ['orderService', '$state', function(orderService, $state) {
+  .controller('CoffeeController', ['orderService', '$state', '$timeout', function(orderService, $state, $timeout) {
 
     var self = this;
     this.orders = orderService.orders;
@@ -97,7 +97,9 @@ app.
         ...drink
       });
 
-      $state.go('order');
+      $timeout(() => {
+        $state.go('order');
+      }, 1000);
     }
   }])
 
