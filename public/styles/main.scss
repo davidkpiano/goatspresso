@@ -128,6 +128,11 @@ body, html {
   color: white;
   letter-spacing: 2px;
   cursor: pointer;
+
+  &.-static {
+    background: transparent;
+    pointer-events: none;
+  }
 }
 
 .ui-list {

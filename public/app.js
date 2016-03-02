@@ -95,9 +95,7 @@ app.
         ...drink
       });
 
-      $timeout(() => {
-        $state.go('order');
-      }, 1000);
+      $state.go('order');
     }
   }])
 
@@ -118,13 +116,16 @@ app.
     this.orders = orderService.orders;
     this.total = orderService.total;
 
+    this.id = '';
+
     this.submit = () => {
 
       this.orders.map((o) => {
 
-        $http.post(__API_URL__ + '/cafe/'+cafeId+'/order', o).then( (r) => {
-          console.log(r);
-        });
+        $http.post(__API_URL__ + '/cafe/'+cafeId+'/order', o)
+          .then( (r) => {
+            this.id = r.data._id;
+          });
       })
     }
   }]);

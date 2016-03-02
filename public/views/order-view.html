@@ -14,7 +14,8 @@
         <div class="ui-price">{{ order.price | currency }}</div>
       </li>
       <li class="ui-item"
-        ui-sref="coffees">
+        ui-sref="coffees"
+        ng-if="!orderCtrl.id">
         <div class="ui-details">
           <strong class="ui-text">New Drink</strong>
         </div>
@@ -23,8 +24,13 @@
     </ul>
   </section>
   <footer ui-view="footer" class="layout-footer">
-    <a class="ui-button" ng-click="orderCtrl.submit()">
+    <a class="ui-button" ng-click="orderCtrl.submit()"
+      ng-if="!orderCtrl.id">
       On My Way!
     </a>
+    <div class="ui-button -static" 
+      ng-if="orderCtrl.id">
+      Let's Goat Caffeinated
+    </div>
   </footer>
 </div>
