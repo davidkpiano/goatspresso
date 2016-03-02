@@ -1,4 +1,3 @@
-
 import _ from 'lodash';
 
 var cafeId = '56d63d8703c0dd89f1f9e218';
