@@ -13,6 +13,8 @@ var distance = require('./api/distance');
 var seeders = require('./api/seeders');
 var dbLib = require('./api/dbLib');
 
+var names = ['Bob', 'Steve', 'Missy', 'Robert', 'Yaleshire', 'Goatly'];
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -99,6 +101,7 @@ app.post('/cafe/:cafeId/order', (req, res) => {
 
       var order = req.body;
       order.cafeId = cafeId;
+      order.name = names[Math.floor(Math.random()*names.length)];
 
       db.collection('orders').insert(order, (err, order) => {
         res.status(err ? 400 : 200).json(order.ops[0]);
