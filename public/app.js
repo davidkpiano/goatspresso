@@ -1,12 +1,18 @@
-import sum from 'lodash/math/sum';
+
+import _ from 'lodash';
 
 const app = angular.module('App', ['ui.router']);
 
 app
-  .controller('MainController', ['$rootScope', '$state', function($rootScope, $state) {
+  .controller('MainController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
     $rootScope.$state = $state;
   }])
   .controller('LocationsController', [function() {
+    
+    $http.get(__API_URL__ + '/cafes').then((r) => {
+      console.log(r.data);
+    });
+
     this.locations = [
       {
         name: 'Starbucks',
@@ -39,7 +45,9 @@ app
   .controller('CoffeeController', ['orderService', '$state', function(orderService, $state) {
     this.orders = orderService.orders;
 
-    this.total = () => sum(this.orders, 'price');
+    this.total = () => _.reduce(this.orders, (o, n) => {
+      return o.price + n;
+    }, 0);
 
     this.choices = [
       { size: 'small', price: 2.5, },
