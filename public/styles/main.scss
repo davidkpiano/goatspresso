@@ -75,6 +75,7 @@ body, html {
   width: 10vmax;
   transform-style: preserve-3d;
   perspective: 100;
+  padding: 1rem 0;
 
   &:before {
     content: '';
@@ -204,4 +205,11 @@ body, html {
 .ui-price {
   font-size: 2rem;
   font-weight: 200;
+}
+
+.ui-header {
+  padding: 1rem;
+  text-align: left;
+  align-self: stretch;
+  background: rgba(black, 0.2);
 }
