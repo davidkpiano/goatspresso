@@ -1,0 +1,18 @@
+
+
+<header ui-view="header" class="layout-header">
+  
+</header>
+<section ui-view="content" class="layout-content" ng-controller="LocationsController as locations">
+  <h1 class="ui-heading">Nearby Cafes</h1>
+  <ul class="ui-list">
+    <li class="ui-item" ng-repeat="location in locations.locations">
+      {{ location.name }}
+    </li>
+  </ul>
+</section>
+<footer ui-view="footer" class="layout-footer">
+  <a ui-sref="cafes" class="ui-button">
+    I Want Coffee
+  </a>
+</footer>

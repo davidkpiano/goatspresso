@@ -31,6 +31,12 @@ body, html {
       align-items: center;
     }
   }
+
+  &[data-page="locations"] {
+    > .layout-content {
+      justify-content: flex-start;
+    }
+  }
 }
 
 .layout-header {
@@ -40,6 +46,7 @@ body, html {
 
 .layout-content {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
   flex-basis: 100%;
 }
@@ -75,4 +82,18 @@ body, html {
   font-size: 1rem;
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-align: center;
+}
+
+.ui-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(white, 0.2);
+  min-height: 5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+  letter-spacing: 2px;
 }

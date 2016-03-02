@@ -9,20 +9,13 @@ app.config([
 
   $stateProvider
     .state('start', {
-      url: "/state1",
-      views: {
-        'content': {
-          templateUrl: 'public/views/start-view.html'
-        }
-      }
+      url: "/",
+      templateUrl: 'public/views/start-view.html'
     })
 
-    .state('state1.list', {
-      url: "/list",
-      templateUrl: "partials/state1.list.html",
-      controller: function($scope) {
-        $scope.items = ["A", "List", "Of", "Items"];
-      }
+    .state('locations', {
+      url: "/locations",
+      templateUrl: "public/views/locations-view.html"
     })
     .state('state2', {
       url: "/state2",

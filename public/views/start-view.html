@@ -1,5 +1,14 @@
 
-<div class="ui-view">
+
+<header ui-view="header" class="layout-header">
+  
+</header>
+<section ui-view="content" class="layout-content">
   <div class="ui-coffee"></div>
   <h1 class="ui-heading">Goatspresso</h1>
-</div>
+</section>
+<footer ui-view="footer" class="layout-footer">
+  <a ui-sref="locations" class="ui-button">
+    I Want Coffee
+  </a>
+</footer>
