@@ -3,17 +3,53 @@ import _ from 'lodash';
 
 const app = angular.module('App', ['ui.router']);
 
-app
+app.
+
+  factory('geoLoc', ['$q', '$window', function ($q, $window) {
+
+    'use strict';
+
+    return {
+      currentPosition: function() {
+        var deferred = $q.defer();
+
+        if (!$window.navigator.geolocation) {
+          deferred.reject('Geolocation not supported.');
+        } else {
+          $window.navigator.geolocation.getCurrentPosition(
+            function (position) {
+              deferred.resolve(position);
+            },
+            function (err) {
+              deferred.reject(err);
+            }
+          );
+        }
+
+        return deferred.promise;
+      }
+    };
+  }])
+
   .controller('MainController', ['$rootScope', '$state', function($rootScope, $state) {
     $rootScope.$state = $state;
   }])
-  .controller('LocationsController', ['$http', function($http) {
+
+  .controller('LocationsController', ['geoLoc', '$http', function(geoLoc, $http) {
     
     this.locations = [];
 
-    $http.get(__API_URL__ + '/cafes').then((r) => {
+    geoLoc.currentPosition().then(function(pos) {
 
-      this.locations = r.data;
+      var lat = pos.coords.latitude;
+      var lon = pos.coords.longitude;
+
+      $http.get(__API_URL__ + '/cafes?lat='+lat+'&lon='+lon).then((r) => {
+
+        this.locations = r.data;
+      });
+
+      self.loading = false;
     });
 
   }])
