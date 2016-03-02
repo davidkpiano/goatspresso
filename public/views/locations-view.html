@@ -7,7 +7,10 @@
   <h1 class="ui-heading">Nearby Cafes</h1>
   <ul class="ui-list">
     <li class="ui-item" ng-repeat="location in locations.locations">
-      {{ location.name }}
+      <div class="ui-details">
+        <div class="ui-heading">{{ location.name }}</div>
+        <div class="ui-text">{{ location.distance }}mi</div>
+      </div>
     </li>
   </ul>
 </section>

@@ -97,3 +97,62 @@ body, html {
   color: white;
   letter-spacing: 2px;
 }
+
+.ui-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.ui-item {
+  flex-basis: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  border-bottom: 1px solid rgba(white, 0.2);
+  padding: 0 1rem;
+}
+
+.ui-details {
+  display: flex;
+  flex-direction: column;
+
+  > .ui-heading {
+    font-size: 1.2rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  > .ui-text {
+    font-size: 1rem;
+    color: rgba(white, 0.6);
+  }
+}
+
+.ui-coffees {
+  margin: 0;
+  padding: 0;
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: stretch;
+
+  > .ui-item {
+    flex-basis: 50%;
+    flex-grow: 1;
+    height: 25%;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

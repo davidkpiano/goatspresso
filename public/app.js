@@ -21,4 +21,17 @@ app
     ]
   }])
 
+  .controller('CoffeesController', [function() {
+    this.coffees = [
+      'cappuccino',
+      'cappuccino',
+      'cappuccino',
+      'cappuccino',
+      'cappuccino',
+      'cappuccino',
+      'cappuccino',
+      'cappuccino',
+    ]
+  }])
+
 export default app;
