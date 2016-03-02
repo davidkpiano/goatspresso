@@ -10,13 +10,12 @@
     "serve:api-silent": "nodemon ./index.js &> ./log/api.log &",
     "mongo:start": "mongod --port 27017 &> ./log/mongo.log &",
     "mongo:stop": "killall mongod",
-    "prelocalapi" : "npm run mongo:start",
-    "localapi" : "npm run serve:api",
+    "prelocalapi": "npm run mongo:start",
+    "localapi": "npm run serve:api",
     "stop": "npm run mongo:stop",
     "build": "webpack -p --config webpack.config.js",
     "build:watch": "webpack-dev-server --config webpack.config.js --port 9999",
     "build:release": "npm run build && firebase deploy",
-
     "start": "node ./index.js"
   },
   "author": "",
