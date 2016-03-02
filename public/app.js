@@ -116,6 +116,7 @@ app.
     this.total = orderService.total;
 
     this.id = '';
+    this.loading = false;
 
     this.submit = () => {
 
