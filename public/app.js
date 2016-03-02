@@ -98,20 +98,25 @@ app.
     }
   }])
 
-  .controller('CafeController', ['$http', function($http) {
+  .controller('CafeController', ['$interval', '$http', function($interval, $http) {
 
     this.orders = [];
     this.loading = true;
 
-    $http.get(__API_URL__ + '/cafe/'+cafeId+'/order').then((r) => {
+    $interval(() => {
 
-      this.loading = false;
-      this.orders = r.data;
-    });
+      $http.get(__API_URL__ + '/cafe/'+cafeId+'/order').then((r) => {
+
+        this.loading = false;
+        this.orders = r.data;
+      });
+    }, 10000)
+
 
   }])
 
-  .controller('OrderController', ['$http', 'geoLoc', 'orderService', function($http, geoLoc, orderService) {
+  .controller('OrderController', ['$interval', '$http', 'geoLoc', 'orderService', 
+    function($interval, $http, geoLoc, orderService) {
     this.orders = orderService.orders;
     this.total = orderService.total;
 
@@ -134,6 +139,15 @@ app.
           .then( (r) => {
             this.loading = false;
             this.id = r.data._id;
+
+            $interval(() => {
+
+              $http.put(__API_URL__ + '/order/'+r.data._id, {
+                lat: lat,
+                lon: lon
+              });
+              console.log('updating location');
+            }, 5000)
           });
 
       });

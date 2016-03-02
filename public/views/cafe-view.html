@@ -7,11 +7,12 @@
   <section ui-view="content" class="layout-content" ng-controller="CafeController as cafe">
     <h1 class="ui-heading">Pending Orders</h1>
     <ul class="ui-list">
-      <li class="ui-item" ng-repeat="order in cafe.orders">
+      <li class="ui-item" ng-repeat="order in cafe.orders | orderBy :'-distance'">
         <div class="ui-details">      
           <div class="ui-heading">{{ order.name }}</div>
           <div class="ui-text">{{ order.size }}</div>
         </div>
+        <div class="ui-price">{{ order.distance }}</div>
         <div class="ui-price">{{ order.price | currency }}</div>
       </li>
     </ul>

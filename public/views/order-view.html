@@ -5,6 +5,10 @@
   </header>
   <section ui-view="content" class="layout-content">
     <h1 class="ui-heading">Your Order</h1>
+    <span class="loader"
+      ng-if="locations.loading">
+      <span class="loader-inner"></span>
+    </span>
     <ul class="ui-list">
       <li class="ui-item" ng-repeat="order in orderCtrl.orders">
         <div class="ui-details">      
