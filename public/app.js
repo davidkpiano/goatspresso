@@ -54,6 +54,10 @@ app
         ...drink
       });
     }
+  }])
+
+  .controller('OrderController', ['orderService', function(orderService) {
+    this.orders = orderService.orders
   }]);
 
 export default app;

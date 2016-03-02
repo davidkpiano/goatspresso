@@ -132,11 +132,13 @@ body, html {
 .ui-details {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 
   > .ui-heading {
     font-size: 1.2rem;
     letter-spacing: 0;
     text-transform: none;
+    text-align: left;
   }
 
 }
@@ -169,4 +171,9 @@ body, html {
     text-decoration: none;
     color: white;
   }
+}
+
+.ui-price {
+  font-size: 2rem;
+  font-weight: 200;
 }
