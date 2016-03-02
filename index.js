@@ -4,6 +4,10 @@ var bodyParser = require('body-parser');
 var port = process.env.API_PORT || 5478; // set to 8080 in env
 var cors = require('cors');
 var mongo = require('mongodb').MongoClient;
+var distance = require('./api/distance');
+
+const destLat = 28.5492468;
+const destLon = -81.3545004;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -39,25 +43,28 @@ app.get('/menu', (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
+app.get('/order', (req, res) => {
 
-  // Use connect method to connect to the Server 
   mongo.connect(mongoUrl, (err, db) => {
 
-    var connected = false;
+    db.collection('orders').find({}).toArray((err, menu) => {
+      res.status(err ? 400 : 200).json(menu);
+      db.close();
+    });
 
-    if (err === null) {
-      connected = true;
-    }
+  });
+});
+
+app.post('/order', (req, res) => {
+
+  mongo.connect(mongoUrl, (err, db) => {
+
+    db.collection('orders').insert(req.body, (err, order) => {
+      res.status(err ? 400 : 200).json(order);
+      db.close();
+    });
 
     res.status(connected ? 200 : 400).json(connected);
-
-    // var collection = db.collection('distances');
-
-    // collection.find({}).toArray((err, docs) => {
-    //   res.status(connected ? 200 : 400).json(docs);
-    //   db.close();
-    // });
 
   });
 
