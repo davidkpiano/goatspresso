@@ -5,7 +5,12 @@
 </header>
 <section ui-view="content" class="layout-content" ng-controller="LocationsController as locations">
   <h1 class="ui-heading">Nearby Cafes</h1>
-  <div class="ui-list">
+  <div class="ui-list" ng-if="location.loading">
+    <span class="ui-item">
+      loading
+    </span>
+  </div>
+  <div class="ui-list" ng-if="location.locations">
     <a class="ui-item" ng-repeat="location in locations.locations"
       ui-sref="coffees">
       <div class="ui-details">

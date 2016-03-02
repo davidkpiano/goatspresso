@@ -1,6 +1,8 @@
 
 import _ from 'lodash';
 
+var currentLocation = null;
+
 const app = angular.module('App', ['ui.router']);
 
 app.
@@ -37,7 +39,9 @@ app.
 
   .controller('LocationsController', ['geoLoc', '$http', function(geoLoc, $http) {
     
-    this.locations = [];
+    var self = this;
+    self.locations = [];
+    self.loading = true;
 
     geoLoc.currentPosition().then(function(pos) {
 
@@ -46,7 +50,8 @@ app.
 
       $http.get(__API_URL__ + '/cafes?lat='+lat+'&lon='+lon).then((r) => {
 
-        this.locations = r.data;
+        self.loading = false;
+        self.locations = r.data;
       });
 
       self.loading = false;
