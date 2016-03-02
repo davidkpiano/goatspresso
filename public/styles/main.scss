@@ -13,7 +13,7 @@ body, html {
   margin: 0;
   font-size: 1rem;
   background: #515866;
-  
+
 }
 
 .layout-main {
@@ -86,7 +86,7 @@ body, html {
     height: 100%;
     border: 3px solid white;
     transform-origin: bottom;
-    transform: rotateX(-10deg);
+    transform: rotateX(-10deg) scale(0.8);
     border-radius: 3px;
   }
 }
@@ -190,6 +190,14 @@ body, html {
     border: none;
     text-decoration: none;
     color: white;
+
+    &:nth-child(2n + 1) {
+      border-right: 1px solid rgba(white, 0.4);
+    }
+
+    &:nth-child(n + 3) {
+      border-top: 1px solid rgba(white, 0.4);
+    }
   }
 }
 

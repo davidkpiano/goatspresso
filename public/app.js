@@ -58,6 +58,10 @@ app
     }
   }])
 
+  .controller('CafeController', [function() {
+
+  }])
+
   .controller('OrderController', ['orderService', function(orderService) {
     this.orders = orderService.orders
   }]);
