@@ -18,7 +18,10 @@ app
 
   }])
 
-  .controller('CoffeesController', [function() {
+  .controller('CoffeesController', ['$http', function($http) {
+    $http.get(__API_URL__ + '/menu').then((r) => {
+      console.log(r.data);
+    });
     this.coffees = [
       'cappuccino',
       'cappuccino',
