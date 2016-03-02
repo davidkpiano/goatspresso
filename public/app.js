@@ -9,24 +9,13 @@ app
   }])
   .controller('LocationsController', ['$http', function($http) {
     
+    this.locations = [];
+
     $http.get(__API_URL__ + '/cafes').then((r) => {
-      console.log(r.data);
+
+      this.locations = r.data;
     });
 
-    this.locations = [
-      {
-        name: 'Starbucks',
-        distance: 1.3,
-      },
-      {
-        name: 'Drunken Monkey',
-        distance: 0.5,
-      },
-      {
-        name: 'Downtown Credo',
-        distance: 5.6,
-      }
-    ]
   }])
 
   .controller('CoffeesController', [function() {
