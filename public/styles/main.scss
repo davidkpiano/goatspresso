@@ -1,6 +1,8 @@
 @import url(//fonts.googleapis.com/css?family=Lato:300,400,700);
 @import url(//fonts.googleapis.com/css?family=Noto+Serif:400,400italic);
 
+$easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+
 *, *:before, *:after {
   box-sizing: border-box;
   position: relative;
@@ -26,7 +28,7 @@ body, html {
   color: white;
   transform-style: preserve-3d;
   perspective: 1000;
-  animation: main 0.3s ease-in-out both;
+  animation: fade-in 0.3s $easing both;
 
   &[data-page="start"] {
     > .layout-content {
@@ -49,7 +51,7 @@ body, html {
   }
 }
 
-@keyframes main {
+@keyframes fade-in {
   from {
     opacity: 0;
   }
@@ -117,6 +119,7 @@ body, html {
   text-decoration: none;
   color: white;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
 .ui-list {
@@ -138,10 +141,28 @@ body, html {
   padding: 0 1rem;
   text-decoration: none;
   color: white;
+  animation: item 0.6s $easing both;
+
+  @for $i from 0 through 8 {
+    &:nth-child(#{$i}) {
+      animation-delay: $i * 0.05s;
+    }
+  }
 
   > .ui-heading {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+}
+
+@keyframes item {
+  from {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+  to {
+    opacity: 1;
+    transform: initial;
   }
 }
 
@@ -214,5 +235,5 @@ body, html {
   align-self: stretch;
   background: rgba(black, 0.2);
   margin-bottom: 1rem;
-  
+
 }
