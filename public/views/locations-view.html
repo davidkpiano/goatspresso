@@ -5,17 +5,13 @@
 </header>
 <section ui-view="content" class="layout-content" ng-controller="LocationsController as locations">
   <h1 class="ui-heading">Nearby Cafes</h1>
-  <ul class="ui-list">
-    <li class="ui-item" ng-repeat="location in locations.locations">
+  <div class="ui-list">
+    <a class="ui-item" ng-repeat="location in locations.locations"
+      ui-sref="coffees">
       <div class="ui-details">
         <div class="ui-heading">{{ location.name }}</div>
         <div class="ui-text">{{ location.distance }}mi</div>
       </div>
-    </li>
-  </ul>
+    </a>
+  </div>
 </section>
-<footer ui-view="footer" class="layout-footer">
-  <a ui-sref="cafes" class="ui-button">
-    I Want Coffee
-  </a>
-</footer>
