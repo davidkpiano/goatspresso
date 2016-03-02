@@ -6,6 +6,7 @@ var cors = require('cors');
 var mongo = require('mongodb').MongoClient;
 var distance = require('./api/distance');
 
+// Destination is Drunken Monkey
 const destLat = 28.5492468;
 const destLon = -81.3545004;
 
@@ -14,6 +15,22 @@ app.use(bodyParser.json());
 
 var dbName = 'goatspresso';
 var mongoUrl = (process.env.MONGOURL || 'mongodb://localhost:27017/') + dbName;
+
+app.get('/seed-locations', (req, res) => {
+
+  mongo.connect(mongoUrl, (err, db) => {
+
+    var menu = require('./api/cafes');
+    db.collection('cafes').remove({}, () => {
+      db.collection('menu').insertMany(menu, (err, result) => {
+        res.status(err ? 400 : 200).json(!err);
+        db.close();
+      });
+    });
+
+  });
+
+});
 
 app.get('/seed-menu', (req, res) => {
 
@@ -43,6 +60,7 @@ app.get('/menu', (req, res) => {
   });
 });
 
+// Get all Orders
 app.get('/order', (req, res) => {
 
   mongo.connect(mongoUrl, (err, db) => {
@@ -55,7 +73,14 @@ app.get('/order', (req, res) => {
   });
 });
 
+// making new order
 app.post('/order', (req, res) => {
+
+  // find distance to Dest
+  var distance = distance.miles(req.body.lat, req.body.lon, destLat, destLon);
+
+  var order = req.body;
+
 
   mongo.connect(mongoUrl, (err, db) => {
 
