@@ -71,7 +71,7 @@ app.get('/cafe/:cafeId/order', (req, res) => {
       db.collection('orders').find({cafeId: cafeId}).toArray((err, orders) => {
         var formatted = _.forEach(orders, (o) => {
 
-          o.distance = distance.miles(o.lat, o.lon, cafe.lat, cafe.lon);
+          o.distance = cafe ? distance.miles(o.lat, o.lon, cafe.lat, cafe.lon) : null;
         });
 
         res.status(err ? 400 : 200).json(orders);
