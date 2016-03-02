@@ -1,12 +1,12 @@
 
 var mongo = require('mongodb').MongoClient;
-var db = require('./dbLib');
+var dbLib = require('./dbLib');
 
 module.exports = {
 
   menus : (req, res) => {
 
-    mongo.connect(db.url, (err, db) => {
+    mongo.connect(dbLib.url, (err, db) => {
 
       var menu = require('./menu');
       db.collection('menu').remove({}, () => {
@@ -20,7 +20,7 @@ module.exports = {
 
   cafes : (req, res) => {
 
-    mongo.connect(db.url, (err, db) => {
+    mongo.connect(dbLib.url, (err, db) => {
 
       var cafes = require('./cafes');
       db.collection('cafes').remove({}, () => {
