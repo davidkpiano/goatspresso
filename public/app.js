@@ -39,24 +39,23 @@ app.
 
   .controller('LocationsController', ['$state', 'geoLoc', '$http', function($state, geoLoc, $http) {
     
-    var self = this;
-    self.locations = [];
-    self.loading = true;
+    this.locations = [];
+    this.loading = true;
 
-    geoLoc.currentPosition().then(function(pos) {
+    geoLoc.currentPosition().then((pos) => {
 
       var lat = pos.coords.latitude;
       var lon = pos.coords.longitude;
 
       $http.get(__API_URL__ + '/cafes?lat='+lat+'&lon='+lon).then((r) => {
 
-        self.loading = false;
-        self.locations = r.data;
+        this.loading = false;
+        this.locations = r.data;
       });
 
     });
 
-    self.pick = (location) => {
+    this.pick = (location) => {
       console.log('picking')
       console.log(location)
       cafeId = location._id;
@@ -79,7 +78,6 @@ app.
 
   .controller('CoffeeController', ['orderService', '$state', '$timeout', function(orderService, $state, $timeout) {
 
-    var self = this;
     this.orders = orderService.orders;
 
     this.name = $state.params.name;
@@ -103,7 +101,16 @@ app.
     }
   }])
 
-  .controller('CafeController', [function() {
+  .controller('CafeController', ['$http', function($http) {
+
+    this.orders = [];
+    this.loading = true;
+
+    $http.get(__API_URL__ + '/cafe/'+cafeId+'/order').then((r) => {
+
+      this.loading = false;
+      this.orders = r.data;
+    });
 
   }])
 
