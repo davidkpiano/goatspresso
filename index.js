@@ -13,7 +13,7 @@ var distance = require('./api/distance');
 var seeders = require('./api/seeders');
 var dbLib = require('./api/dbLib');
 
-var names = ['Bob', 'Steve', 'Missy', 'Robert', 'Yaleshire', 'Goatly'];
+var names = ['Bob', 'Steve', 'Missy', 'Robert', 'Yaleshire', 'Goatly', 'Niesha','Juliette','Cristen','Richie','Marie','Brandy','Daniella','Jesus','Kyung','Ben','Katherine','Darrin','Kristopher','Pilar','Merry','Theola','Jule','Leisha','Melida','Kayla'];
 
 app.use(cors());
 app.use(bodyParser.json());

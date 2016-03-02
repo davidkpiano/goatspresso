@@ -13,7 +13,7 @@
     <ul class="ui-list">
       <li class="ui-item -order" ng-repeat="order in cafe.orders | orderBy :'-distance'">
         <div class="ui-details">      
-          <div class="ui-heading">Billy Goat</div>
+          <div class="ui-heading">{{order.name}}</div>
           <div class="ui-text">{{ order.order.length }} orders</div>
         </div>
         <div class="ui-price">{{ order.distance }} mi</div>
