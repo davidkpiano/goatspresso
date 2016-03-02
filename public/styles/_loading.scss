@@ -1,11 +1,3 @@
-body, html {
-    height: 100%;
-    text-align: center;
-}
-
-body {
-  background-color: #242F3F;
-}
 
 .loader {
   display: inline-block;
@@ -15,6 +7,9 @@ body {
   border: 4px solid #Fff;
   top: 50%;
   animation: loader 2s infinite ease;
+  align-self: center;
+  justify-self: center;
+  margin: 2rem 0;
 }
 
 .loader-inner {

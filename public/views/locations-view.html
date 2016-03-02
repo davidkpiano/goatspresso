@@ -4,9 +4,10 @@
   </header>
   <section ui-view="content" class="layout-content" ng-controller="LocationsController as locations">
     <h1 class="ui-heading">Nearby Cafes</h1>
-    <div class="ui-list" ng-if="location.loading">
-      <span class="loader"><span class="loader-inner"></span></span>
-    </div>
+    <span class="loader"
+      ng-if="locations.loading">
+      <span class="loader-inner"></span>
+    </span>
     <div class="ui-list" ng-if="locations.locations">
       <a class="ui-item" ng-repeat="location in locations.locations" ng-click="locations.pick(location)">
         <div class="ui-details">
