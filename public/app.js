@@ -1,7 +1,7 @@
 
 import _ from 'lodash';
 
-var currentLocation = null;
+var cafeId = '56d63d8703c0dd89f1f9e218';
 
 const app = angular.module('App', ['ui.router']);
 
@@ -37,7 +37,7 @@ app.
     $rootScope.$state = $state;
   }])
 
-  .controller('LocationsController', ['geoLoc', '$http', function(geoLoc, $http) {
+  .controller('LocationsController', ['$state', 'geoLoc', '$http', function($state, geoLoc, $http) {
     
     var self = this;
     self.locations = [];
@@ -54,8 +54,14 @@ app.
         self.locations = r.data;
       });
 
-      self.loading = false;
     });
+
+    self.pick = (location) => {
+      console.log('picking')
+      console.log(location)
+      cafeId = location._id;
+      $state.go('coffees');
+    }
 
   }])
 
@@ -72,13 +78,11 @@ app.
   }])
 
   .controller('CoffeeController', ['orderService', '$state', function(orderService, $state) {
+
+    var self = this;
     this.orders = orderService.orders;
 
     this.name = $state.params.name;
-
-    this.total = () => _.reduce(this.orders, (o, n) => {
-      return o.price + n;
-    }, 0);
 
     this.choices = [
       { size: 'small', price: 2.5, },
@@ -101,8 +105,19 @@ app.
 
   }])
 
-  .controller('OrderController', ['orderService', function(orderService) {
-    this.orders = orderService.orders
+  .controller('OrderController', ['$http', 'orderService', function($http, orderService) {
+    this.orders = orderService.orders;
+    this.total = orderService.total;
+
+    this.submit = () => {
+
+      this.orders.map((o) => {
+
+        $http.post(__API_URL__ + '/cafe/'+cafeId+'/order', o).then( (r) => {
+          console.log(r);
+        });
+      })
+    }
   }]);
 
 export default app;
