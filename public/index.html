@@ -5,10 +5,18 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
-<body>
+<body ng-controller="MainController as main">
+  <main ui-view class="layout-main" data-page="{{ $state.current.name }}">
 
-  <main ui-view class="layout-main">
-    
+    <header ui-view="header" class="layout-header">
+      
+    </header>
+    <section ui-view="content" class="layout-content">
+      
+    </section>
+    <footer ui-view="footer" class="layout-footer">
+      
+    </footer>
   </main>
 
 </body>

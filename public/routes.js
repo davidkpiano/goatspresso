@@ -1,13 +1,20 @@
 import app from './app';
 
-app.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
+app.config([
+  '$stateProvider',
+  '$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise("/start");
 
   $stateProvider
     .state('start', {
       url: "/state1",
-      templateUrl: "public/views/start-view.html"
+      views: {
+        'content': {
+          templateUrl: 'public/views/start-view.html'
+        }
+      }
     })
 
     .state('state1.list', {
