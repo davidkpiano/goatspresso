@@ -4,7 +4,10 @@
 
 </header>
 <section ui-view="content" class="layout-content" ng-controller="CoffeeController as coffee">
-  <div ng-if="coffee.orders.length"></div>
+  <div ng-if="coffee.orders.length" class="ui-heading">
+    <span>{{ coffee.orders.length }} drink{{ coffee.orders.length > 1 ? 's' : ''}}</span>
+    <span> | {{coffee.total() | currency}}</span>
+  </div>
   <div class="ui-coffee"></div>
   <h1 class="ui-heading">Cappuccino</h1>
   <div class="ui-choices">

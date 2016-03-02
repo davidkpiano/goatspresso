@@ -1,3 +1,5 @@
+import sum from 'lodash/math/sum';
+
 const app = angular.module('App', ['ui.router']);
 
 app
@@ -37,7 +39,7 @@ app
   .controller('CoffeeController', ['orderService', function(orderService) {
     this.orders = orderService.orders;
 
-    console.log(this.orders);
+    this.total = () => sum(this.orders, 'price');
 
     this.choices = [
       { size: 'small', price: 2.5, },
@@ -46,10 +48,10 @@ app
       { size: 'grande', price: 4, },
     ];
 
-    this.add = (order) => {
+    this.add = (drink) => {
       orderService.add({
         name: 'cappuccino',
-        ...order
+        ...drink
       });
     }
   }]);
