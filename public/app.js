@@ -4,10 +4,10 @@ import _ from 'lodash';
 const app = angular.module('App', ['ui.router']);
 
 app
-  .controller('MainController', ['$http', '$rootScope', '$state', function($http, $rootScope, $state) {
+  .controller('MainController', ['$rootScope', '$state', function($rootScope, $state) {
     $rootScope.$state = $state;
   }])
-  .controller('LocationsController', [function() {
+  .controller('LocationsController', ['$http', function($http) {
     
     $http.get(__API_URL__ + '/cafes').then((r) => {
       console.log(r.data);
