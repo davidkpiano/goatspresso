@@ -1,11 +1,13 @@
 
-
+<header ui-view="header" class="layout-header">
+  
+</header>
 <section ui-view="content" class="layout-content" ng-controller="CoffeeController as coffee">
   <div ng-if="coffee.orders.length" class="ui-header">
     <span>{{ coffee.orders.length }} drink{{ coffee.orders.length > 1 ? 's' : ''}}</span>
   </div>
   <div class="ui-coffee"></div>
-  <h1 class="ui-heading">Cappuccino</h1>
+  <h1 class="ui-heading">{{ coffee.name }}</h1>
   <div class="ui-choices">
     <div class="ui-item"
       ng-repeat="choice in coffee.choices"

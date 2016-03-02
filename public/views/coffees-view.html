@@ -5,7 +5,7 @@
 </header>
 <section ui-view="content" class="layout-content" ng-controller="CoffeesController as coffees">
   <div class="ui-choices">
-    <a ui-sref="coffee"
+    <a ng-click="coffees.selectCoffee(coffee.name)"
       class="ui-item"
       ng-repeat="coffee in coffees.coffees track by $index">
       <div class="ui-coffee"></div>

@@ -54,16 +54,22 @@ app.
 
   }])
 
-  .controller('CoffeesController', ['$http', function($http) {
+  .controller('CoffeesController', ['$http', '$state', function($http, $state) {
     $http.get(__API_URL__ + '/menu').then((r) => {
       this.coffees = r.data;
     });
-    
+
+    this.selectCoffee = (name) => {
+      $state.go('coffee', { name });
+    }
+
     this.coffees = [];
   }])
 
   .controller('CoffeeController', ['orderService', '$state', function(orderService, $state) {
     this.orders = orderService.orders;
+
+    this.name = $state.params.name;
 
     this.total = () => _.reduce(this.orders, (o, n) => {
       return o.price + n;
@@ -78,7 +84,7 @@ app.
 
     this.add = (drink) => {
       orderService.add({
-        name: 'cappuccino',
+        name: this.name,
         ...drink
       });
 

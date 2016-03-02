@@ -61,6 +61,7 @@ body, html {
 .layout-header {
   flex-basis: 50px;
   flex-shrink: 0;
+  background: rgba(black, 0.2);
 }
 
 .layout-content {
@@ -212,4 +213,6 @@ body, html {
   text-align: left;
   align-self: stretch;
   background: rgba(black, 0.2);
+  margin-bottom: 1rem;
+  
 }

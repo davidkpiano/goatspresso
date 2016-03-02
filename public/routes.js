@@ -9,7 +9,7 @@ app.config([
 
   $stateProvider
     .state('start', {
-      url: "/",
+      url: "/start",
       templateUrl: 'public/views/start-view.html'
     })
 
@@ -24,7 +24,7 @@ app.config([
     })
 
     .state('coffee', {
-      url: "/coffee",
+      url: "/coffee/:name",
       templateUrl: "public/views/coffee-view.html"
     })
 
