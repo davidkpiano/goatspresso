@@ -37,6 +37,13 @@ body, html {
       justify-content: flex-start;
     }
   }
+
+  &[data-page="coffee"] {
+    > .layout-content {
+      justify-content: stretch;
+      align-items: center;
+    }
+  }
 }
 
 .layout-header {
@@ -79,7 +86,7 @@ body, html {
 }
 
 .ui-heading {
-  font-size: 1rem;
+  font-size: 1.5rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-align: center;
@@ -115,6 +122,11 @@ body, html {
   align-items: center;
   border-bottom: 1px solid rgba(white, 0.2);
   padding: 0 1rem;
+
+  > .ui-heading {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 .ui-details {
@@ -127,13 +139,14 @@ body, html {
     text-transform: none;
   }
 
-  > .ui-text {
-    font-size: 1rem;
-    color: rgba(white, 0.6);
-  }
 }
 
-.ui-coffees {
+.ui-text {
+  font-size: 1rem;
+  color: rgba(white, 0.6);
+}
+
+.ui-choices {
   margin: 0;
   padding: 0;
   flex-basis: 100%;
@@ -148,11 +161,12 @@ body, html {
   > .ui-item {
     flex-basis: 50%;
     flex-grow: 1;
-    height: 25%;
-    border: 1px solid white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: none;
+    text-decoration: none;
+    color: white;
   }
 }

@@ -1,0 +1,17 @@
+
+
+<header ui-view="header" class="layout-header">
+
+</header>
+<section ui-view="content" class="layout-content" ng-controller="CoffeeController as coffee">
+  <div ng-if="coffee.orders.length"></div>
+  <div class="ui-coffee"></div>
+  <h1 class="ui-heading">Cappuccino</h1>
+  <div class="ui-choices">
+    <div class="ui-item" ng-repeat="choice in coffee.choices"
+      ng-click="coffee.add(choice)">
+      <div class="ui-heading">{{ choice.size }}</div>
+      <div class="ui-text">{{ choice.price | currency }}</div>
+    </div>
+  </div>
+</section>

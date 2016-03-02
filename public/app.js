@@ -34,4 +34,24 @@ app
     ]
   }])
 
+  .controller('CoffeeController', ['orderService', function(orderService) {
+    this.orders = orderService.orders;
+
+    console.log(this.orders);
+
+    this.choices = [
+      { size: 'small', price: 2.5, },
+      { size: 'medium', price: 3, },
+      { size: 'large', price: 3.5, },
+      { size: 'grande', price: 4, },
+    ];
+
+    this.add = (order) => {
+      orderService.add({
+        name: 'cappuccino',
+        ...order
+      });
+    }
+  }]);
+
 export default app;

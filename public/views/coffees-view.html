@@ -4,10 +4,12 @@
   
 </header>
 <section ui-view="content" class="layout-content" ng-controller="CoffeesController as coffees">
-  <ul class="ui-coffees">
-    <li class="ui-item" ng-repeat="coffee in coffees.coffees track by $index">
+  <div class="ui-choices">
+    <a ui-sref="coffee"
+      class="ui-item"
+      ng-repeat="coffee in coffees.coffees track by $index">
       <div class="ui-coffee"></div>
       <h1 class="ui-heading">Coffee</h1>
-    </li>
-  </ul>
+    </a>
+  </div>
 </section>

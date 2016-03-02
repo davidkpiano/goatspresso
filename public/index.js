@@ -5,6 +5,7 @@ import './js/controller';
 import './app';
 
 import './routes';
+import './services/order-service';
 import './styles/main.scss';
 
 export default app;

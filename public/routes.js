@@ -23,6 +23,11 @@ app.config([
       templateUrl: "public/views/coffees-view.html"
     })
 
+    .state('coffee', {
+      url: "/coffee",
+      templateUrl: "public/views/coffee-view.html"
+    })
+
     .state('state2', {
       url: "/state2",
       templateUrl: "partials/state2.html"
