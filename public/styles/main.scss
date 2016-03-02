@@ -18,6 +18,30 @@ body, html {
 
 }
 
+.layout-container {
+  width: 100%;
+  height: 100%;
+  
+  &[data-page="start"] {
+    .layout-content {
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &[data-page="locations"] {
+    .layout-content {
+      justify-content: flex-start;
+    }
+  }
+
+  &[data-page="coffee"] {
+    .layout-content {
+      justify-content: stretch;
+      align-items: center;
+    }
+}
+
 .layout-main {
   width: 100%;
   height: 100%;
@@ -30,24 +54,6 @@ body, html {
   perspective: 1000;
   animation: fade-in 0.3s $easing both;
 
-  &[data-page="start"] {
-    > .layout-content {
-      justify-content: center;
-      align-items: center;
-    }
-  }
-
-  &[data-page="locations"] {
-    > .layout-content {
-      justify-content: flex-start;
-    }
-  }
-
-  &[data-page="coffee"] {
-    > .layout-content {
-      justify-content: stretch;
-      align-items: center;
-    }
   }
 }
 

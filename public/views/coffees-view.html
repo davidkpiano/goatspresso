@@ -1,15 +1,20 @@
 
 
-<header ui-view="header" class="layout-header">
-  
-</header>
-<section ui-view="content" class="layout-content" ng-controller="CoffeesController as coffees">
-  <div class="ui-choices">
-    <a ng-click="coffees.selectCoffee(coffee.name)"
-      class="ui-item"
-      ng-repeat="coffee in coffees.coffees track by $index">
-      <div class="ui-coffee"></div>
-      <h1 class="ui-heading">{{ coffee.name }}</h1>
-    </a>
-  </div>
-</section>
+<div class="layout-main">
+  <header ui-view="header" class="layout-header">
+    
+  </header>
+  <section ui-view="content" class="layout-content" ng-controller="CoffeesController as coffees">
+    <div ng-if="coffee.orders.length" class="ui-header">
+      <span>{{ coffee.orders.length }} drink{{ coffee.orders.length > 1 ? 's' : ''}}</span>
+    </div>
+    <div class="ui-choices">
+      <a ng-click="coffees.selectCoffee(coffee.name)"
+        class="ui-item"
+        ng-repeat="coffee in coffees.coffees track by $index">
+        <div class="ui-coffee"></div>
+        <h1 class="ui-heading">{{ coffee.name }}</h1>
+      </a>
+    </div>
+  </section>
+</div>

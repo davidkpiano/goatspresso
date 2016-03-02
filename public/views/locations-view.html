@@ -1,18 +1,19 @@
-
-<header ui-view="header" class="layout-header">
-  
-</header>
-<section ui-view="content" class="layout-content" ng-controller="LocationsController as locations">
-  <h1 class="ui-heading">Nearby Cafes</h1>
-  <div class="ui-loading" ng-if="locations.loading">
-    loading location
-  </div>
-  <div class="ui-list" ng-if="locations.locations">
-    <a class="ui-item" ng-repeat="location in locations.locations" ng-click="locations.pick(location)">
-      <div class="ui-details">
-        <div class="ui-heading">{{ location.name }}</div>
-        <div class="ui-text">{{ location.distance }}mi</div>
-      </div>
-    </a>
-  </div>
-</section>
+<div class="layout-main">
+  <header ui-view="header" class="layout-header">
+    
+  </header>
+  <section ui-view="content" class="layout-content" ng-controller="LocationsController as locations">
+    <h1 class="ui-heading">Nearby Cafes</h1>
+    <div class="ui-loading" ng-if="locations.loading">
+      loading location
+    </div>
+    <div class="ui-list" ng-if="locations.locations">
+      <a class="ui-item" ng-repeat="location in locations.locations" ng-click="locations.pick(location)">
+        <div class="ui-details">
+          <div class="ui-heading">{{ location.name }}</div>
+          <div class="ui-text">{{ location.distance }}mi</div>
+        </div>
+      </a>
+    </div>
+  </section>
+</div>
