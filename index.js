@@ -2,6 +2,7 @@
 var _ = require('lodash');
 
 var mongo = require('mongodb').MongoClient;
+var ObjectID = require('mongodb').ObjectID;
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -10,7 +11,7 @@ var cors = require('cors');
 
 var distance = require('./api/distance');
 var seeders = require('./api/seeders');
-var db = require('./api/dbLib');
+var dbLib = require('./api/dbLib');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -21,7 +22,7 @@ app.get('/seed-menu', seeders.menus);
 
 app.get('/menu', (req, res) => {
 
-  mongo.connect(db.url, (err, db) => {
+  mongo.connect(dbLib.url, (err, db) => {
 
     db.collection('menu').find({}).toArray((err, menu) => {
       res.status(err ? 400 : 200).json(menu);
@@ -34,14 +35,14 @@ app.get('/menu', (req, res) => {
 app.get('/cafes', (req, res) => {
 
   var lat = req.query.lat;
-  var long = req.query.long;
+  var lon = req.query.lon;
 
-  mongo.connect(db.url, (err, db) => {
+  mongo.connect(dbLib.url, (err, db) => {
 
     db.collection('cafes').find({}).toArray((err, cafes) => {
 
       var formatted = _.forEach(cafes, (c) => {
-        c.distance = distance.miles(c.lat, c.long, lat, long);
+        c.distance = distance.miles(c.lat, c.lon, lat, lon);
       });
 
       res.status(err ? 400 : 200).json(formatted);
@@ -53,35 +54,78 @@ app.get('/cafes', (req, res) => {
 });
 
 // Get all Orders
-app.get('/order', (req, res) => {
+app.get('/cafe/:cafeId/order', (req, res) => {
 
-  mongo.connect(db.url, (err, db) => {
+  // find lat lon from cafe
+  // need cafe id from frontend
+  var cafeId = req.params.cafeId;
 
-    db.collection('orders').find({}).toArray((err, menu) => {
-      res.status(err ? 400 : 200).json(menu);
-      db.close();
+  mongo.connect(dbLib.url, (err, db) => {
+
+    db.collection('cafes').findOne({_id : ObjectID(cafeId)}, (err, cafe) => {
+
+      if (err) {
+        res.status(404).json('cafe not found');
+      }
+
+      db.collection('orders').find({cafeId: cafeId}).toArray((err, orders) => {
+        var formatted = _.forEach(orders, (o) => {
+
+          o.distance = distance.miles(o.lat, o.lon, cafe.lat, cafe.lon);
+        });
+
+        res.status(err ? 400 : 200).json(orders);
+        db.close();
+      });
     });
+
 
   });
 });
 
 // making new order
-app.post('/order', (req, res) => {
+app.post('/cafe/:cafeId/order', (req, res) => {
 
-  // find distance to Dest
-  var distance = distance.miles(req.body.lat, req.body.long, destLat, destLong);
+  // need cafe id from frontend
+  var cafeId = req.params.cafeId;
 
-  var order = req.body;
+  mongo.connect(dbLib.url, (err, db) => {
 
-  mongo.connect(db.url, (err, db) => {
+    db.collection('cafes').find({_id : ObjectID(cafeId)}, (err, cafe) => {
 
-    db.collection('orders').insert(req.body, (err, order) => {
-      res.status(err ? 400 : 200).json(order);
-      db.close();
+      if (err) {
+        res.status(404).json('cafe not found');
+      }
+
+      var order = req.body;
+      order.cafeId = cafeId;
+
+      db.collection('orders').insert(order, (err, order) => {
+        res.status(err ? 400 : 200).json(order.ops[0]);
+        db.close();
+      });
+
     });
+  });
 
-    res.status(connected ? 200 : 400).json(connected);
+});
 
+// update location on order
+app.put('/order/:orderId', (req, res) => {
+
+  // need cafe id from frontend
+  var orderId = req.params.orderId;
+
+  mongo.connect(dbLib.url, (err, db) => {
+
+    db.collection('orders').update(
+      {_id : ObjectID(orderId)}, 
+      { $set: {lat: req.body.lat, lon: req.body.lon}}, 
+      (err, order) => {
+
+        res.status(err ? 400 : 200).json(!err);
+        db.close();
+      });
   });
 
 });
