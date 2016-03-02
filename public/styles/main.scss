@@ -12,6 +12,8 @@ body, html {
   height: 100%;
   margin: 0;
   font-size: 1rem;
+  background: #515866;
+  
 }
 
 .layout-main {
@@ -24,6 +26,7 @@ body, html {
   color: white;
   transform-style: preserve-3d;
   perspective: 1000;
+  animation: main 0.3s ease-in-out both;
 
   &[data-page="start"] {
     > .layout-content {
@@ -43,6 +46,15 @@ body, html {
       justify-content: stretch;
       align-items: center;
     }
+  }
+}
+
+@keyframes main {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
