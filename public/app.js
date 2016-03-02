@@ -103,6 +103,12 @@ app.
     this.orders = [];
     this.loading = true;
 
+    $http.get(__API_URL__ + '/cafe/'+cafeId+'/order').then((r) => {
+
+      this.loading = false;
+      this.orders = r.data;
+    });
+
     $interval(() => {
 
       $http.get(__API_URL__ + '/cafe/'+cafeId+'/order').then((r) => {
@@ -146,7 +152,6 @@ app.
                 lat: lat,
                 lon: lon
               });
-              console.log('updating location');
             }, 5000)
           });
 
