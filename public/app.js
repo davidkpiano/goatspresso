@@ -56,18 +56,10 @@ app.
 
   .controller('CoffeesController', ['$http', function($http) {
     $http.get(__API_URL__ + '/menu').then((r) => {
-      console.log(r.data);
+      this.coffees = r.data;
     });
-    this.coffees = [
-      'cappuccino',
-      'cappuccino',
-      'cappuccino',
-      'cappuccino',
-      'cappuccino',
-      'cappuccino',
-      'cappuccino',
-      'cappuccino',
-    ]
+    
+    this.coffees = [];
   }])
 
   .controller('CoffeeController', ['orderService', '$state', function(orderService, $state) {
