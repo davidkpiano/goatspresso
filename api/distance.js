@@ -3,6 +3,10 @@ function deg2rad(deg) {
     return (deg) * (Math.PI/180)
 }
 
+function round(x) {
+  return Math.round(x*100)/100;
+};
+
 module.exports = {
 
   miles : function(lat1,lon1,lat2,lon2) {
@@ -17,6 +21,6 @@ module.exports = {
       ;
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     var d = R * c; // Distance in miles
-    return d;
+    return round(d);
   }
 }
