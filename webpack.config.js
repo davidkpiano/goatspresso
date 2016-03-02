@@ -27,7 +27,7 @@ module.exports = {
       inject: 'body'
     }),
     new webpack.DefinePlugin({
-      __API_URL__: JSON.stringify(process.env.API_URL || 'https://goatspresso.herokuapp.com'),
+      __API_URL__: JSON.stringify(process.env.API_URL || 'http://goatspresso-59745.onmodulus.net'),
     }),
   ],
 
