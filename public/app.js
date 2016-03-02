@@ -36,7 +36,7 @@ app
     ]
   }])
 
-  .controller('CoffeeController', ['orderService', function(orderService) {
+  .controller('CoffeeController', ['orderService', '$state', function(orderService, $state) {
     this.orders = orderService.orders;
 
     this.total = () => sum(this.orders, 'price');
@@ -53,6 +53,8 @@ app
         name: 'cappuccino',
         ...drink
       });
+
+      $state.go('order');
     }
   }])
 

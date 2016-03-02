@@ -140,7 +140,13 @@ body, html {
     text-transform: none;
     text-align: left;
   }
+}
 
+.ui-add {
+  &:before {
+    content: '+';
+    font-size: 3rem;
+  }
 }
 
 .ui-text {
