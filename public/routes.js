@@ -5,9 +5,6 @@ app.config([
   '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.when('', '/start');
-  $urlRouterProvider.when('/', '/start');
-
   $urlRouterProvider.otherwise("/start");
 
   $stateProvider
