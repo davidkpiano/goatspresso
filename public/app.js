@@ -112,7 +112,7 @@ app.
 
   }])
 
-  .controller('OrderController', ['$http', 'orderService', function($http, orderService) {
+  .controller('OrderController', ['$http', 'geoLoc', 'orderService', function($http, geoLoc, orderService) {
     this.orders = orderService.orders;
     this.total = orderService.total;
 
@@ -120,13 +120,23 @@ app.
 
     this.submit = () => {
 
-      this.orders.map((o) => {
+      this.loading = true;
+      geoLoc.currentPosition().then((pos) => {
 
-        $http.post(__API_URL__ + '/cafe/'+cafeId+'/order', o)
+        var lat = pos.coords.latitude;
+        var lon = pos.coords.longitude;
+
+        $http.post(__API_URL__ + '/cafe/'+cafeId+'/order', {
+          order : this.orders,
+          lat: lat, 
+          lon: lon
+        })
           .then( (r) => {
+            this.loading = false;
             this.id = r.data._id;
           });
-      })
+
+      });
     }
   }]);
 
